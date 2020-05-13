@@ -33,7 +33,7 @@ public class FileWork {
         output.close();
 
         System.out.printf("Elapsed %,9.3f ms\n", time / 1_000_000_000.0);
-        //deletefile(test2);
+        deletefile(test2);
     }
      public void deletefile(File t){
         t.delete();
