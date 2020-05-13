@@ -1,8 +1,9 @@
 import java.io.*;
+import java.util.Scanner;
 
 public class FileWork {
 
-    public static void space() throws IOException {
+    public  void space() throws IOException {
         File in = new File("C:\\Users\\kelgrin\\Desktop\\test\\test.txt");
        // File in2 = new File("C:\\Users\\kelgrin\\Desktop");
         long buffer = in.getFreeSpace();
@@ -10,24 +11,32 @@ public class FileWork {
         System.out.println("Свободное место:" + bufferGb + " Gb");
     }
 
-    public static void file() throws IOException {
-        double a = 1322494234;
+    public void file() throws IOException {
+        Scanner l = new Scanner(System.in);
+        int n;
+        double a = 1322494234, q=0, i = 1;
         long time = System.nanoTime();
-        File test = new File("C:\\Users\\kelgrin\\Desktop\\test\\test.txt");
-        File test2 = new File("C:\\Users\\kelgrin\\Desktop\\test\\test2.txt");
-        FileInputStream input = new FileInputStream(test);
+        File test2 = File.createTempFile("test2", null, null);
         FileOutputStream output = new FileOutputStream(test2);
-        byte[] buffer = new byte[4096];
-            while (test2.length() < a) {
-                int len = input.read(buffer);
-                output.write(buffer);
+        System.out.print("Введите размер буффера: ");
+        n = l.nextInt();
+        byte[] buffer = new byte[n];
+        while (test2.length() < a) {
+            output.write(buffer);
+            q = (n*i*100)/a;
+            i++;
+            if (i%2!=0) {
+                System.out.println(String.format("%(.2f ", q) + "%");
             }
-        time = System.nanoTime() - time;
-        System.out.printf("Elapsed %,9.3f ms\n", time/1_000_000_000.0);
         }
+        time = System.nanoTime() - time;
+        output.close();
 
-     public static void deletefile(File test2){
-        test2.delete();
+        System.out.printf("Elapsed %,9.3f ms\n", time / 1_000_000_000.0);
+        //deletefile(test2);
+    }
+     public void deletefile(File t){
+        t.delete();
      }
 }
 
